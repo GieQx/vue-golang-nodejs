@@ -5,9 +5,53 @@
     <title>App</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
+
 <body>
+    <style>
+    body{
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+
+    }
+    p, h3, ul{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    li.fav {
+        background: #00a2ff;
+        color: white;
+    }
+</style>
     <div id="app" class="container"> 
-        <h2>{{title}} - {{author}} - {{age}}</h2>
+        <a v-bind:href="url"> Best Website Ever! </a>
+        <div v-if="showBooks">
+            <li v-for="book in books" :class="{fav: book.isFav}" @click="toggleisFav(book)" >
+            <h3>{{ book.title }}</h3>
+            <img :src="book.img" :alt="book.title" class="book-image">
+            <p>{{ book.author }}</p>
+            
+            </li>
+        </div>
+        </br></br>
+    
+        <button @click="toggleShowBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else>Show Books</span>
+        </button>
+
+        <div v-show="showBooks" class="books">Currently Showing books..</div>   
+            
     </div>
     
     <script src="app.js"></script>
